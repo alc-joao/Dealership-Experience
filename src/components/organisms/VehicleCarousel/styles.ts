@@ -2,11 +2,15 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  position: relative;
+  z-index: 10;
+`;
 
 export const VehicleInfo = styled.div`
   margin-bottom: 2.4rem;
   min-height: 5.7rem;
+  pointer-events: none;
 `;
 
 export const VehicleType = styled.p`
@@ -38,7 +42,9 @@ export const CategoryButton = styled.button<{ $active: boolean }>`
   height: 2.5rem;
   border-radius: 0.35rem;
   border: 0.1rem solid rgba(255, 255, 255, 0.08);
+
   font-size: 1.1rem;
+
   background: ${({ theme, $active }) => ($active ? theme.gray : 'transparent')};
   color: ${({ theme, $active }) => ($active ? theme.black : 'rgba(255, 255, 255, 0.35)')};
 
@@ -63,18 +69,31 @@ export const CarouselHint = styled.div`
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
+
   display: flex;
   align-items: center;
   gap: 0.8rem;
 
+  white-space: nowrap;
+
   button {
-    font-size: 2rem;
-    line-height: 1;
-    color: ${({ theme }) => theme.gray};
-    transition: 0.3s ease;
+    width: 2rem;
+    height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.25s ease;
 
     &:hover {
-      color: ${({ theme }) => theme.white};
+      transform: scale(1.08);
+    }
+
+    img {
+      width: 1.4rem;
+      height: 1.4rem;
+      object-fit: contain;
     }
   }
 
@@ -82,6 +101,7 @@ export const CarouselHint = styled.div`
     font-size: 1.15rem;
     font-weight: 700;
     color: ${({ theme }) => theme.white};
+    white-space: nowrap;
   }
 `;
 
@@ -123,44 +143,52 @@ export const VehicleCard = styled.div<{
   $active: boolean;
 }>`
   position: relative;
+
   min-width: 31.5rem;
   height: 14.4rem;
+
+  border: none;
+  outline: none;
+
   border-radius: 0.45rem;
   overflow: hidden;
 
-  border: 0.1rem solid
-    ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.45)' : 'rgba(255, 255, 255, 0.08)')};
-
   background: ${({ theme, $active }) => ($active ? theme.gray : '#333337')};
+
   cursor: pointer;
 
-  transform: ${({ $active }) =>
-    $active ? 'translateY(-0.2rem) scale(1.006)' : 'translateY(0) scale(1)'};
-
-  &:hover {
-    transform: translateY(-0.2rem) scale(1.006);
-  }
-
-  box-shadow: ${({ $active }) => ($active ? '0 1.6rem 4rem rgba(0, 0, 0, 0.32)' : 'none')};
+  transform: translateY(0) scale(1);
+  box-shadow: none;
 
   transition:
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.35s ease,
-    background 0.35s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 
   &:hover {
     transform: translateY(-0.1rem) scale(1.002);
-    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.22);
+  }
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
   }
 
   span {
     position: relative;
     z-index: 2;
+
     display: block;
+
     padding: 1.2rem 1.4rem 0;
+
     font-size: 1.25rem;
     font-weight: 800;
+
     white-space: pre-line;
 
     color: ${({ theme, $exclusive, $active }) => {
@@ -177,9 +205,12 @@ export const VehicleCard = styled.div<{
 
   &::before {
     content: '';
+
     position: absolute;
+
     left: 0;
     bottom: 3.4rem;
+
     width: 2rem;
     height: 2rem;
 
@@ -187,8 +218,7 @@ export const VehicleCard = styled.div<{
       circle at 100% 0,
       transparent 2rem,
       ${({ theme, $exclusive, $active }) =>
-          $exclusive || $active ? theme.radicalRed : theme.greenYellow}
-        0
+        $exclusive || $active ? theme.radicalRed : theme.greenYellow} 0
     );
 
     z-index: 1;
@@ -197,23 +227,33 @@ export const VehicleCard = styled.div<{
 
 export const VehicleImage = styled.img`
   position: absolute;
+
   left: 50%;
   top: 3.1rem;
+
   transform: translateX(-50%);
+
   width: 20.2rem;
   height: 7.6rem;
+
   object-fit: contain;
 `;
 
 export const VehicleFooter = styled.div`
   position: absolute;
+
   left: 0;
   right: 0;
   bottom: 0;
+
   z-index: 5;
+
   height: 3.4rem;
+
   background: #222428;
+
   padding: 0 1.5rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,6 +261,7 @@ export const VehicleFooter = styled.div`
   h3 {
     font-size: 1.25rem;
     font-weight: 800;
+
     color: ${({ theme }) => theme.gray};
   }
 
@@ -228,9 +269,12 @@ export const VehicleFooter = styled.div`
     display: flex;
     align-items: center;
     gap: 0.6rem;
+
     opacity: 70%;
+
     font-size: 1.25rem;
     font-weight: 800;
+
     color: ${({ theme }) => theme.white};
 
     img {
@@ -243,5 +287,6 @@ export const VehicleFooter = styled.div`
 export const Icon = styled.img`
   width: 1.3rem;
   height: 1.3rem;
+
   object-fit: contain;
 `;
