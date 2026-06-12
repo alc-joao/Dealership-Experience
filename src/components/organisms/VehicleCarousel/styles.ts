@@ -150,8 +150,7 @@ export const VehicleCard = styled.div<{
   border-radius: 0.45rem;
   overflow: hidden;
 
-  border: ${({ $active }) =>
-    $active ? 'none' : '0.1rem solid rgba(255, 255, 255, 0.08)'};
+  border: ${({ $active }) => ($active ? 'none' : '0.1rem solid rgba(255, 255, 255, 0.08)')};
 
   outline: none !important;
 
@@ -226,7 +225,8 @@ export const VehicleCard = styled.div<{
       circle at 100% 0,
       transparent 2rem,
       ${({ theme, $exclusive, $active }) =>
-        $exclusive || $active ? theme.radicalRed : theme.greenYellow} 0
+          $exclusive || $active ? theme.radicalRed : theme.greenYellow}
+        0
     );
 
     z-index: 1;

@@ -136,7 +136,10 @@ export function VehicleCarousel({
             exit={{ opacity: 0, y: 18 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <VehiclesTrack $activeVehicleIndex={activeVehicleIndex} $vehiclesLength={vehicles.length}>
+            <VehiclesTrack
+              $activeVehicleIndex={activeVehicleIndex}
+              $vehiclesLength={vehicles.length}
+            >
               {vehicles.map((vehicle, index) => (
                 <MotionVehicleCard
                   key={vehicle.id}

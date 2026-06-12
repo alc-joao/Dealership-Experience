@@ -1,4 +1,6 @@
-export const headerIntroAnimation = {
+import type { Variants } from 'framer-motion';
+
+export const headerIntroAnimation: Variants = {
   hidden: {
     opacity: 0,
     x: -40,

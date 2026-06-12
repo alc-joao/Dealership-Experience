@@ -1,4 +1,6 @@
-export const vehicleHeroAnimation = {
+import type { Variants } from 'framer-motion';
+
+export const vehicleHeroAnimation: Variants = {
   hidden: {
     opacity: 0,
     x: 40,

@@ -1,4 +1,6 @@
-export const statsPanelAnimation = {
+import type { Variants } from 'framer-motion';
+
+export const statsPanelAnimation: Variants = {
   hidden: {
     opacity: 0,
     x: -40,

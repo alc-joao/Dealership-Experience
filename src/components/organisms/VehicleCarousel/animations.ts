@@ -1,4 +1,6 @@
-export const vehicleCarouselAnimation = {
+import type { Variants } from 'framer-motion';
+
+export const vehicleCarouselAnimation: Variants = {
   hidden: {
     opacity: 0,
     y: 16,
@@ -10,12 +12,12 @@ export const vehicleCarouselAnimation = {
 
     transition: {
       duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      ease: 'easeOut',
     },
   },
 };
 
-export const vehicleCardAnimation = {
+export const vehicleCardAnimation: Variants = {
   hidden: {
     opacity: 0,
     y: 12,
@@ -30,7 +32,7 @@ export const vehicleCardAnimation = {
     transition: {
       delay: index * 0.03,
       duration: 0.35,
-      ease: [0.16, 1, 0.3, 1],
+      ease: 'easeOut',
     },
   }),
 };
