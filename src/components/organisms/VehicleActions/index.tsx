@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { playSound } from '@/utils/audio';
+
 import {
   Container,
   PriceLabel,
@@ -61,16 +63,19 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
   const isPurchase = modalType === 'purchase';
 
   const modalTitle = isPurchase ? 'Confirmação' : 'Test Drive';
+
   const modalText = isPurchase
     ? 'Deseja confirmar a aquisição deste veículo?'
     : 'Deseja iniciar uma experiência de test drive com este veículo?';
 
   const modalButtonLabel = isPurchase ? 'Confirmar compra' : 'Iniciar test drive';
+
   const successMessage = isPurchase
     ? 'Veículo adquirido com sucesso.'
     : 'Test drive iniciado com sucesso.';
 
   const vehiclePrice = vehicle.exclusive ? vehicle.diamondPrice : vehicle.cardPrice;
+
   const formattedVehiclePrice = vehicle.exclusive
     ? `${vehiclePrice} diamantes`
     : `R$ ${vehiclePrice}`;
@@ -79,16 +84,24 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
     ? vehicleHeroContent.icons.diamond
     : vehicleHeroContent.icons.money;
 
+  function handleOpenModal(type: ModalType) {
+    playSound('/audio/click.mp3', 0.25);
+    setModalType(type);
+  }
+
   function handleCloseModal() {
+    playSound('/audio/click.mp3', 0.18);
     setModalType('');
     setSuccess(false);
   }
 
   function handleConfirm() {
+    playSound('/audio/success.mp3', 0.4);
     setSuccess(true);
 
     setTimeout(() => {
-      handleCloseModal();
+      setModalType('');
+      setSuccess(false);
     }, 1600);
   }
 
@@ -132,12 +145,12 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
         </PriceRow>
 
         <ButtonsRow>
-          <ActionButton type="button" onClick={() => setModalType('purchase')}>
+          <ActionButton type="button" onClick={() => handleOpenModal('purchase')}>
             <ButtonIcon src={vehicleHeroContent.icons.bag} alt="" />
             {vehicleHeroContent.acquireButtonLabel}
           </ActionButton>
 
-          <TestDriveButton type="button" onClick={() => setModalType('testDrive')}>
+          <TestDriveButton type="button" onClick={() => handleOpenModal('testDrive')}>
             <ButtonIcon src={vehicleHeroContent.icons.steering} alt="" />
             {vehicleHeroContent.testDriveButtonLabel}
           </TestDriveButton>

@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { playSound } from '@/utils/audio';
+
 import {
   Container,
   VehicleInfo,
@@ -23,12 +25,11 @@ import { categories, vehicleCarouselContent } from './constants';
 import { vehicleCarouselAnimation, vehicleCardAnimation } from './animations';
 
 type Vehicle = {
-  id: number;
+  id: string;
   type: string;
   name: string;
   title: string;
   category: string;
-  moneyPrice: string;
   diamondPrice: string;
   cardPrice: string;
   image: string;
@@ -64,6 +65,26 @@ export function VehicleCarousel({
     return null;
   }
 
+  function handleSelectVehicle(index: number) {
+    playSound('/audio/click.mp3', 0.25);
+    onSelectVehicle(index);
+  }
+
+  function handlePrevious() {
+    playSound('/audio/click.mp3', 0.25);
+    onPreviousVehicle();
+  }
+
+  function handleNext() {
+    playSound('/audio/click.mp3', 0.25);
+    onNextVehicle();
+  }
+
+  function handleCategory(category: string) {
+    playSound('/audio/click.mp3', 0.25);
+    onChangeCategory(category);
+  }
+
   return (
     <MotionContainer variants={vehicleCarouselAnimation} initial="hidden" animate="visible">
       <VehicleInfo>
@@ -87,18 +108,18 @@ export function VehicleCarousel({
             key={item}
             type="button"
             $active={activeCategory === item}
-            onClick={() => onChangeCategory(item)}
+            onClick={() => handleCategory(item)}
           >
             {item}
           </CategoryButton>
         ))}
 
         <CarouselHint>
-          <button type="button" onClick={onPreviousVehicle}>
+          <button type="button" onClick={handlePrevious}>
             <img src="/svgs/icons/arrow-chevron-left.svg" alt="Anterior" />
           </button>
 
-          <button type="button" onClick={onNextVehicle}>
+          <button type="button" onClick={handleNext}>
             <img src="/svgs/icons/arrow-chevron-right.svg" alt="Próximo" />
           </button>
 
@@ -115,9 +136,7 @@ export function VehicleCarousel({
             exit={{ opacity: 0, y: 18 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <VehiclesTrack
-              $activeVehicleIndex={activeVehicleIndex}
-              $vehiclesLength={vehicles.length}>
+            <VehiclesTrack $activeVehicleIndex={activeVehicleIndex} $vehiclesLength={vehicles.length}>
               {vehicles.map((vehicle, index) => (
                 <MotionVehicleCard
                   key={vehicle.id}
@@ -125,8 +144,8 @@ export function VehicleCarousel({
                   variants={vehicleCardAnimation}
                   initial="hidden"
                   animate="visible"
-                  onClick={() => onSelectVehicle(index)}
                   tabIndex={-1}
+                  onClick={() => handleSelectVehicle(index)}
                   $exclusive={vehicle.exclusive}
                   $active={activeVehicleIndex === index}
                 >
