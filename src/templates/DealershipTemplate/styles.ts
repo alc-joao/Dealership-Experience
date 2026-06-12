@@ -30,6 +30,7 @@ export const TopContent = styled.div`
   position: absolute;
 
   top: 3.7rem;
+  z-index: 5;
 `;
 
 export const BottomContent = styled.div`
@@ -38,4 +39,5 @@ export const BottomContent = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 10;
 `;

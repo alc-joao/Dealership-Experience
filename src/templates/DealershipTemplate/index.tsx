@@ -34,7 +34,7 @@ export default function DealershipTemplate() {
           <StatsPanel stats={activeVehicle.stats} />
         </TopContent>
 
-        <VehicleActions userBalance={userBalance} />
+        <VehicleActions userBalance={userBalance} vehicle={activeVehicle} />
 
         <BottomContent>
           <VehicleCarousel

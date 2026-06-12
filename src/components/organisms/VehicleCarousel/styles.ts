@@ -42,10 +42,16 @@ export const CategoryButton = styled.button<{ $active: boolean }>`
   background: ${({ theme, $active }) => ($active ? theme.gray : 'transparent')};
   color: ${({ theme, $active }) => ($active ? theme.black : 'rgba(255, 255, 255, 0.35)')};
 
+  transform: ${({ $active }) => ($active ? 'translateY(-0.08rem)' : 'translateY(0)')};
+
+  box-shadow: ${({ $active }) =>
+    $active ? '0 0.6rem 1.8rem rgba(0, 0, 0, 0.18)' : 'none'};
+
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
+    background 0.28s ease,
+    color 0.28s ease,
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 
   &:hover {
     transform: translateY(-0.1rem);
@@ -240,4 +246,3 @@ export const Icon = styled.img`
   height: 1.3rem;
   object-fit: contain;
 `;
-
