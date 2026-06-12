@@ -1,5 +1,9 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 import {
-  Wrapper,
+  Container,
   PriceLabel,
   PriceRow,
   PriceItem,
@@ -11,41 +15,48 @@ import {
   ButtonIcon,
 } from './styles';
 
+import { vehicleHeroContent } from './constants';
+import { vehicleHeroAnimation } from './animations';
+
 type VehicleActionsProps = {
-  moneyPrice: string;
-  diamondPrice: string;
+  userBalance: {
+    money: string;
+    diamonds: string;
+  };
 };
 
-export default function VehicleActions({ moneyPrice, diamondPrice }: VehicleActionsProps) {
+const MotionContainer = motion(Container);
+
+export function VehicleActions({ userBalance }: VehicleActionsProps) {
   return (
-    <Wrapper>
-      <PriceLabel>Valor do veiculo</PriceLabel>
+    <MotionContainer variants={vehicleHeroAnimation} initial="hidden" animate="visible">
+      <PriceLabel>{vehicleHeroContent.priceLabel}</PriceLabel>
 
       <PriceRow>
         <PriceItem>
-          <Icon src="/svgs/icons/money.svg" alt="" />
-          <span>{moneyPrice}</span>
+          <Icon src={vehicleHeroContent.icons.money} alt="" />
+          <span>{userBalance.money}</span>
         </PriceItem>
 
         <Divider>|</Divider>
 
         <PriceItem>
-          <Icon src="/svgs/icons/diamond.svg" alt="" />
-          <span>{diamondPrice}</span>
+          <Icon src={vehicleHeroContent.icons.diamond} alt="" />
+          <span>{userBalance.diamonds}</span>
         </PriceItem>
       </PriceRow>
 
       <ButtonsRow>
         <ActionButton>
-          <ButtonIcon src="/svgs/icons/bag.svg" alt="" />
-          ADQUIRIR
+          <ButtonIcon src={vehicleHeroContent.icons.bag} alt="" />
+          {vehicleHeroContent.acquireButtonLabel}
         </ActionButton>
 
         <TestDriveButton>
-          <ButtonIcon src="/svgs/icons/steering.svg" alt="" />
-          TEST DRIVE
+          <ButtonIcon src={vehicleHeroContent.icons.steering} alt="" />
+          {vehicleHeroContent.testDriveButtonLabel}
         </TestDriveButton>
       </ButtonsRow>
-    </Wrapper>
+    </MotionContainer>
   );
 }

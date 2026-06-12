@@ -95,11 +95,11 @@ export function VehicleCarousel({
 
         <CarouselHint>
           <button type="button" onClick={onPreviousVehicle}>
-            ‹
+            <img src="/svgs/icons/arrow-chevron-left.svg" alt="Anterior" />
           </button>
 
           <button type="button" onClick={onNextVehicle}>
-            ›
+            <img src="/svgs/icons/arrow-chevron-right.svg" alt="Próximo" />
           </button>
 
           <p>{vehicleCarouselContent.hint}</p>
@@ -115,7 +115,9 @@ export function VehicleCarousel({
             exit={{ opacity: 0, y: 18 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <VehiclesTrack $activeVehicleIndex={activeVehicleIndex}>
+            <VehiclesTrack
+              $activeVehicleIndex={activeVehicleIndex}
+              $vehiclesLength={vehicles.length}>
               {vehicles.map((vehicle, index) => (
                 <MotionVehicleCard
                   key={vehicle.id}
@@ -127,7 +129,16 @@ export function VehicleCarousel({
                   $exclusive={vehicle.exclusive}
                   $active={activeVehicleIndex === index}
                 >
-                  <span>{vehicle.type}</span>
+                  <span>
+                    {vehicle.exclusive ? (
+                      <>
+                        <strong>Exclusivo</strong>
+                        VIP
+                      </>
+                    ) : (
+                      vehicle.type
+                    )}
+                  </span>
 
                   <VehicleImage src={vehicle.image} alt={vehicle.name} />
 

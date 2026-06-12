@@ -2,8 +2,9 @@
 
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   position: absolute;
+
   right: 0;
   bottom: 21rem;
 
@@ -15,6 +16,7 @@ export const Wrapper = styled.div`
 export const PriceLabel = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
+
   color: ${({ theme }) => theme.white};
 `;
 
@@ -28,6 +30,7 @@ export const PriceRow = styled.div`
   span {
     font-size: 1.45rem;
     font-weight: 800;
+
     color: ${({ theme }) => theme.white};
   }
 `;
@@ -45,6 +48,7 @@ export const Divider = styled.span`
 export const Icon = styled.img`
   width: 1.3rem;
   height: 1.3rem;
+
   object-fit: contain;
 `;
 
@@ -55,6 +59,7 @@ export const ButtonsRow = styled.div`
 
 export const ActionButton = styled.button`
   height: 3.2rem;
+
   padding: 0 1.8rem;
 
   border-radius: 999rem;
@@ -78,6 +83,7 @@ export const ActionButton = styled.button`
 
 export const TestDriveButton = styled.button`
   height: 3.2rem;
+
   padding: 0 1.8rem;
 
   border-radius: 999rem;
@@ -87,6 +93,7 @@ export const TestDriveButton = styled.button`
   gap: 0.7rem;
 
   background: ${({ theme }) => theme.white};
+
   color: ${({ theme }) => theme.black};
 
   font-size: 1.15rem;
@@ -101,5 +108,6 @@ export const TestDriveButton = styled.button`
 export const ButtonIcon = styled.img`
   width: 1.2rem;
   height: 1.2rem;
+
   object-fit: contain;
 `;

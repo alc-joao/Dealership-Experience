@@ -5,7 +5,6 @@ import styled from 'styled-components';
 export const Container = styled.main`
   width: 100%;
   height: 100vh;
-
   overflow: hidden;
 
   background-image: url('/imgs/backgrounds/dealership-bg.png');
@@ -13,7 +12,11 @@ export const Container = styled.main`
   background-position: center;
   background-repeat: no-repeat;
 
-  padding: 1.5rem;
+  padding: 3.2rem;
+
+  @media (max-width: 1366px) {
+    padding: 2.4rem;
+  }
 `;
 
 export const Content = styled.section`
@@ -26,8 +29,7 @@ export const Content = styled.section`
 export const TopContent = styled.div`
   position: absolute;
 
-  top: 5rem;
-  left: 2.5rem;
+  top: 3.7rem;
 `;
 
 export const BottomContent = styled.div`

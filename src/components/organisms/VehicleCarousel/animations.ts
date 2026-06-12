@@ -1,7 +1,7 @@
 export const vehicleCarouselAnimation = {
   hidden: {
     opacity: 0,
-    y: 40,
+    y: 16,
   },
 
   visible: {
@@ -9,8 +9,8 @@ export const vehicleCarouselAnimation = {
     y: 0,
 
     transition: {
-      duration: 0.8,
-      ease: 'easeOut',
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -18,8 +18,8 @@ export const vehicleCarouselAnimation = {
 export const vehicleCardAnimation = {
   hidden: {
     opacity: 0,
-    y: 24,
-    scale: 0.96,
+    y: 12,
+    scale: 0.98,
   },
 
   visible: (index: number) => ({
@@ -28,9 +28,9 @@ export const vehicleCardAnimation = {
     scale: 1,
 
     transition: {
-      delay: index * 0.06,
-      duration: 0.45,
-      ease: 'easeOut',
+      delay: index * 0.03,
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   }),
 };
