@@ -296,3 +296,13 @@ export const ModalSecondaryButton = styled.button`
     opacity: 0.82;
   }
 `;
+
+export const ModalSuccessMessage = styled.p`
+  margin-bottom: 1.8rem;
+
+  color: ${({ theme }) => theme.greenYellow};
+
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+`;

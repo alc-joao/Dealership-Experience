@@ -44,8 +44,7 @@ export const CategoryButton = styled.button<{ $active: boolean }>`
 
   transform: ${({ $active }) => ($active ? 'translateY(-0.08rem)' : 'translateY(0)')};
 
-  box-shadow: ${({ $active }) =>
-    $active ? '0 0.6rem 1.8rem rgba(0, 0, 0, 0.18)' : 'none'};
+  box-shadow: ${({ $active }) => ($active ? '0 0.6rem 1.8rem rgba(0, 0, 0, 0.18)' : 'none')};
 
   transition:
     background 0.28s ease,

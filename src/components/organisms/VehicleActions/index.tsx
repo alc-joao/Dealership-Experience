@@ -25,6 +25,7 @@ import {
   ModalActions,
   ModalPrimaryButton,
   ModalSecondaryButton,
+  ModalSuccessMessage,
 } from './styles';
 
 import { vehicleHeroContent } from './constants';
@@ -51,6 +52,7 @@ const MotionContainer = motion(Container);
 
 export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
   const [modalType, setModalType] = useState<ModalType>('');
+  const [success, setSuccess] = useState(false);
 
   const isPurchase = modalType === 'purchase';
 
@@ -60,10 +62,34 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
     ? `O senhor(a) deseja comprar o veículo ${vehicle.name}, clique na ação abaixo para confirmar compra.`
     : `O senhor(a) deseja agendar um test drive com o veículo ${vehicle.name}, clique na ação abaixo para confirmar.`;
 
+  const modalButtonLabel = isPurchase ? 'Confirmar compra' : 'Agendar test drive';
+
+  const successMessage = isPurchase
+    ? 'Compra confirmada com sucesso.'
+    : 'Test drive solicitado com sucesso.';
+
   const vehiclePrice = vehicle.exclusive ? vehicle.diamondPrice : vehicle.cardPrice;
+
+  const formattedVehiclePrice = vehicle.exclusive
+    ? `${vehiclePrice} diamantes`
+    : `R$ ${vehiclePrice}`;
+
   const priceIcon = vehicle.exclusive
     ? vehicleHeroContent.icons.diamond
     : vehicleHeroContent.icons.money;
+
+  function handleCloseModal() {
+    setModalType('');
+    setSuccess(false);
+  }
+
+  function handleConfirm() {
+    setSuccess(true);
+
+    setTimeout(() => {
+      handleCloseModal();
+    }, 1800);
+  }
 
   return (
     <>
@@ -104,7 +130,7 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setModalType('')}
+            onClick={handleCloseModal}
           >
             <ModalContent
               as={motion.div}
@@ -127,16 +153,18 @@ export function VehicleActions({ userBalance, vehicle }: VehicleActionsProps) {
 
                 <ModalPriceBox>
                   <img src={priceIcon} alt="" />
-                  <strong>{vehiclePrice}</strong>
+                  <strong>{formattedVehiclePrice}</strong>
                 </ModalPriceBox>
 
+                {success && <ModalSuccessMessage>✓ {successMessage}</ModalSuccessMessage>}
+
                 <ModalActions>
-                  <ModalPrimaryButton type="button" onClick={() => setModalType('')}>
+                  <ModalPrimaryButton type="button" onClick={handleConfirm}>
                     <span>✓</span>
-                    Confirmar
+                    {modalButtonLabel}
                   </ModalPrimaryButton>
 
-                  <ModalSecondaryButton type="button" onClick={() => setModalType('')}>
+                  <ModalSecondaryButton type="button" onClick={handleCloseModal}>
                     <span>×</span>
                     Cancelar
                   </ModalSecondaryButton>
